@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>CarAI 사용 가이드</title>
   <link rel="icon" type="image/svg+xml" href="favicon-dark.svg" media="(prefers-color-scheme: dark)">
   <link rel="icon" type="image/svg+xml" href="favicon-light.svg" media="(prefers-color-scheme: light)">
@@ -188,6 +191,8 @@
     }
     .status-badge.waiting { background: #FEF3C7; color: #92400E; }
     .status-badge.progress { background: #DCFCE7; color: #166534; }
+    .status-badge.signature-pending { background: #CFFAFE; color: #155E75; }
+    .status-badge.signature-completed { background: #CCFBF1; color: #115E59; }
     .status-badge.completed { background: #E0E7FF; color: #3730A3; }
     .status-badge.canceled { background: #FEE2E2; color: #991B1B; }
     .status-badge.generating { background: #FEF08A; color: #854D0E; }
@@ -503,7 +508,9 @@
       <span class="status-arrow">→</span>
       <span class="status-badge progress">작업 중</span>
       <span class="status-arrow">→</span>
-      <span class="status-badge completed">완료</span>
+      <span class="status-badge signature-pending">서명 대기</span>
+      <span class="status-arrow">→</span>
+      <span class="status-badge signature-completed">서명 완료</span>
       <span class="status-arrow">→</span>
       <span class="status-badge generating">소견서 생성 중</span>
       <span class="status-arrow">→</span>
@@ -522,8 +529,15 @@
       </ul>
     </div>
 
-    <h3>작업 완료</h3>
-    <p>모든 점검이 끝나면 <strong>"작업 완료"</strong>를 눌러 최종 결과를 저장합니다. 완료 후 자동으로 AI 소견서 화면으로 이동합니다.</p>
+    <h3>작업 완료 및 서명</h3>
+    <p>모든 점검이 끝나면 <strong>"작업 완료"</strong>를 눌러 최종 결과를 저장합니다.</p>
+    <div class="card">
+      <ul>
+        <li>작업 완료 시 <strong>서명 대기</strong> 상태로 전환됩니다.</li>
+        <li><strong>고객 서명</strong>을 받은 후 서명을 제출하면 <strong>서명 완료</strong> 상태가 됩니다.</li>
+        <li>서명 완료 후 AI 소견서 생성 화면으로 이동합니다.</li>
+      </ul>
+    </div>
 
     <h3>작업 취소</h3>
     <p>대기 중 또는 작업 중 상태의 작업은 취소할 수 있습니다.</p>
