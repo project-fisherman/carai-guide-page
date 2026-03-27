@@ -6,7 +6,8 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>CarAI 사용 가이드</title>
+  <meta name="description" content="CarAI - AI 기반 차량 안전점검 및 정비 소견서 자동 생성 시스템. 정비소 업무 효율을 높이세요.">
+  <title>CarAI - AI 차량 점검 관리</title>
   <link rel="icon" type="image/svg+xml" href="favicon-dark.svg" media="(prefers-color-scheme: dark)">
   <link rel="icon" type="image/svg+xml" href="favicon-light.svg" media="(prefers-color-scheme: light)">
   <link rel="icon" type="image/png" href="favicon.png">
@@ -17,6 +18,7 @@
       --surface2: #3D2E22;
       --primary: #F96706;
       --primary-dim: rgba(249, 103, 6, 0.15);
+      --primary-glow: rgba(249, 103, 6, 0.08);
       --text: #FFFFFF;
       --text-secondary: #9C8474;
       --border: rgba(255,255,255,0.08);
@@ -37,29 +39,124 @@
     /* Hero */
     .hero {
       text-align: center;
-      padding: 80px 24px 48px;
+      padding: 80px 24px 32px;
       background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
     }
     .hero-icon {
-      width: 80px; height: 80px;
-      margin: 0 auto 24px;
+      width: 88px; height: 88px;
+      margin: 0 auto 28px;
       background: var(--primary-dim);
       border: 1px solid rgba(249,103,6,0.25);
-      border-radius: 20px;
+      border-radius: 24px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 36px;
+      font-size: 40px;
     }
     .hero h1 {
-      font-size: 32px; font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 12px;
+      font-size: 36px; font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      line-height: 1.2;
     }
-    .hero p {
+    .hero h1 .accent { color: var(--primary); }
+    .hero .subtitle {
       color: var(--text-secondary);
-      font-size: 16px;
-      max-width: 480px;
-      margin: 0 auto;
+      font-size: 17px;
+      max-width: 500px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
     }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 16px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 24px rgba(249,103,6,0.3);
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(249,103,6,0.4); }
+
+    /* Value Props */
+    .value-section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 48px 20px 0;
+    }
+    .value-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin: 0 0 48px;
+    }
+    @media (max-width: 600px) {
+      .value-grid { grid-template-columns: 1fr; }
+    }
+    .value-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .value-card .num {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .value-card .label {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    /* Before/After */
+    .compare {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 20px 48px;
+    }
+    .compare-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 520px) {
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+    .compare-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .compare-card h4 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .compare-card.before h4 { color: #ef4444; }
+    .compare-card.after h4 { color: #22c55e; }
+    .compare-card li {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    .compare-card.after li { color: rgba(255,255,255,0.85); }
 
     /* Layout */
     .container {
@@ -68,12 +165,30 @@
       padding: 0 20px 100px;
     }
 
+    /* Section Title (centered) */
+    .section-title-center {
+      text-align: center;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .section-heading-center {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 40px;
+    }
+
     /* TOC */
     .toc {
       background: var(--surface);
       border-radius: var(--radius);
       padding: 28px;
-      margin: 32px 0 48px;
+      margin: 0 0 48px;
       border: 1px solid var(--border);
     }
     .toc h2 {
@@ -87,9 +202,7 @@
       list-style: none;
       counter-reset: toc;
     }
-    .toc li {
-      counter-increment: toc;
-    }
+    .toc li { counter-increment: toc; }
     .toc a {
       display: flex;
       align-items: center;
@@ -193,11 +306,8 @@
     .status-badge.progress { background: #DCFCE7; color: #166534; }
     .status-badge.signature-pending { background: #CFFAFE; color: #155E75; }
     .status-badge.signature-completed { background: #CCFBF1; color: #115E59; }
-    .status-badge.completed { background: #E0E7FF; color: #3730A3; }
-    .status-badge.canceled { background: #FEE2E2; color: #991B1B; }
     .status-badge.generating { background: #FEF08A; color: #854D0E; }
     .status-badge.report-done { background: #FAE8FF; color: #86198F; }
-    .status-badge.failed { background: #FEE2E2; color: #991B1B; }
     .status-arrow {
       color: var(--text-secondary);
       padding: 0 8px;
@@ -290,10 +400,10 @@
       line-height: 1.5;
     }
 
-    /* SMS Preview */
-    .sms-preview {
-      background: #fff;
-      color: #222;
+    /* Alimtalk Preview */
+    .alimtalk-preview {
+      background: #FEE500;
+      color: #191919;
       border-radius: 16px;
       padding: 20px;
       margin: 16px 0;
@@ -302,13 +412,19 @@
       line-height: 1.6;
       box-shadow: 0 4px 24px rgba(0,0,0,0.3);
     }
-    .sms-preview .sender {
+    .alimtalk-preview .sender {
       font-weight: 700;
       margin-bottom: 8px;
-      color: #555;
       font-size: 12px;
+      color: #555;
     }
-    .sms-preview a {
+    .alimtalk-preview .msg {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      color: #333;
+    }
+    .alimtalk-preview a {
       color: #2563EB;
       word-break: break-all;
     }
@@ -320,10 +436,30 @@
       margin: 48px 0;
     }
 
+    /* CTA Bottom */
+    .cta-bottom {
+      text-align: center;
+      padding: 48px 24px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin: 48px 0 0;
+    }
+    .cta-bottom h2 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .cta-bottom p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
     /* Back to top */
     .back-top {
       text-align: center;
-      margin-top: 48px;
+      margin-top: 32px;
     }
     .back-top a {
       color: var(--text-secondary);
@@ -333,29 +469,86 @@
       transition: color 0.2s;
     }
     .back-top a:hover { color: var(--primary); }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 32px 20px;
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
   </style>
 </head>
 <body>
 
 <!-- Hero -->
 <div class="hero">
-  <div class="hero-icon">🚗</div>
-  <h1>CarAI 사용 가이드</h1>
-  <p>AI 기반 차량 점검 관리 시스템.<br>엑셀 수납 이력 분석부터 AI 정비 소견서 생성까지.</p>
+  <div class="hero-icon">🔧</div>
+  <h1>정비소를 위한<br><span class="accent">AI 점검 관리</span> 시스템</h1>
+  <p class="subtitle">수납 이력 분석부터 안전점검, AI 소견서 생성, 고객 알림까지.<br>종이 점검표 대신 CarAI로 업장을 디지털화하세요.</p>
+  <a href="https://carai-web.web.app" class="hero-cta">앱 시작하기 →</a>
+</div>
+
+<!-- Value Props -->
+<div class="value-section">
+  <div class="value-grid">
+    <div class="value-card">
+      <div class="num">20개</div>
+      <div class="label">차량 안전점검 항목</div>
+    </div>
+    <div class="value-card">
+      <div class="num">AI</div>
+      <div class="label">자동 소견서 생성</div>
+    </div>
+    <div class="value-card">
+      <div class="num">5분</div>
+      <div class="label">고객 알림 발송까지</div>
+    </div>
+  </div>
+</div>
+
+<!-- Before / After -->
+<div class="compare">
+  <div class="compare-title">CarAI 도입 전 vs 후</div>
+  <div class="compare-grid">
+    <div class="compare-card before">
+      <h4>Before</h4>
+      <ul>
+        <li>종이 점검표 수기 작성</li>
+        <li>수납 이력 엑셀에서 일일이 찾기</li>
+        <li>소견서 직접 작성 (30분 이상)</li>
+        <li>고객에게 결과 전화/문자로 설명</li>
+        <li>점검 기록 보관 어려움</li>
+      </ul>
+    </div>
+    <div class="compare-card after">
+      <h4>After</h4>
+      <ul>
+        <li>앱에서 체크만으로 점검 완료</li>
+        <li>엑셀 업로드 한 번으로 이력 자동 분석</li>
+        <li>AI가 전문 소견서 자동 작성</li>
+        <li>카카오 알림톡으로 PDF 자동 발송</li>
+        <li>모든 기록 클라우드 자동 보관</li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <div class="container">
 
   <!-- TOC -->
+  <div class="section-title-center">사용 가이드</div>
+  <div class="section-heading-center">어떻게 사용하나요?</div>
+
   <nav class="toc">
     <h2>목차</h2>
     <ol>
       <li><a href="#signup">회원가입 및 로그인</a></li>
-      <li><a href="#shop">업장 관리</a></li>
-      <li><a href="#checklist">안전점검표 관리</a></li>
-      <li><a href="#assign">접수 및 작업 할당</a></li>
-      <li><a href="#work">작업 진행</a></li>
-      <li><a href="#report">AI 소견서 생성</a></li>
+      <li><a href="#shop">업장 개설 및 직원 초대</a></li>
+      <li><a href="#checklist">안전점검표 등록</a></li>
+      <li><a href="#assign">고객 접수 및 작업 할당</a></li>
+      <li><a href="#work">점검 진행 및 서명</a></li>
+      <li><a href="#report">AI 소견서 생성 및 발송</a></li>
       <li><a href="#roles">역할 및 권한</a></li>
     </ol>
   </nav>
@@ -396,25 +589,25 @@
   <!-- 2. 업장 관리 -->
   <div class="section" id="shop">
     <div class="section-label">Step 2</div>
-    <h2>업장 관리</h2>
+    <h2>업장 개설 및 직원 초대</h2>
 
     <h3>업장 생성</h3>
     <p>처음 사용 시 업장을 생성합니다. 업장을 생성한 사람은 자동으로 <strong>OWNER(소유자)</strong> 역할이 됩니다.</p>
     <div class="card">
       <ul>
-        <li><strong>업장 이름</strong> — 예: CarAI 정비소</li>
-        <li><strong>주소</strong> — 예: 서울시 강남구</li>
-        <li><strong>전화번호</strong> — 예: 02-1234-5678</li>
+        <li><strong>업장 이름</strong> — 예: 판교 아우디 서비스센터</li>
+        <li><strong>주소</strong> — 예: 판교역로 10번길</li>
+        <li><strong>전화번호</strong> — 예: 031-1234-5678</li>
       </ul>
     </div>
 
     <h3>직원 초대</h3>
-    <p>업장에 직원을 초대하는 두 가지 방법이 있습니다.</p>
+    <p>정비사와 접수 담당자를 업장에 초대합니다.</p>
     <div class="table-wrap">
       <table>
         <tr><th>방법</th><th>설명</th></tr>
         <tr><td>전화번호로 초대</td><td>직원의 전화번호를 입력하면 초대 링크가 SMS로 발송됩니다.</td></tr>
-        <tr><td>직접 초대</td><td>이미 가입된 사용자를 ID로 직접 초대합니다.</td></tr>
+        <tr><td>직접 초대</td><td>이미 가입된 사용자를 검색하여 바로 초대합니다.</td></tr>
       </table>
     </div>
     <p>초대받은 사용자는 초대를 수락하면 업장에 합류합니다.</p>
@@ -422,7 +615,7 @@
     <h3>직원 관리</h3>
     <div class="card">
       <ul>
-        <li><strong>역할 변경</strong> — OWNER가 직원의 역할을 변경할 수 있습니다.</li>
+        <li><strong>역할 변경</strong> — OWNER가 직원을 STAFF ↔ MANAGER로 변경할 수 있습니다.</li>
         <li><strong>직원 내보내기</strong> — MANAGER 이상이 직원을 내보낼 수 있습니다.</li>
         <li><strong>업장 탈퇴</strong> — 본인이 직접 업장을 나갈 수 있습니다.</li>
       </ul>
@@ -434,8 +627,8 @@
   <!-- 3. 안전점검표 -->
   <div class="section" id="checklist">
     <div class="section-label">Step 3</div>
-    <h2>안전점검표 관리</h2>
-    <p>안전점검표는 차량 점검 시 사용하는 체크리스트입니다. 시스템에서 기본 제공하는 점검표를 업장에 등록하여 사용합니다.</p>
+    <h2>안전점검표 등록</h2>
+    <p>차량 점검 시 사용할 안전점검표를 업장에 등록합니다. ACDelco 공식 점검표를 기본 제공합니다.</p>
 
     <div class="flow">
       <div class="flow-step">📋 점검표 선택</div>
@@ -443,6 +636,14 @@
       <div class="flow-step">👁️ 미리보기 확인</div>
       <div class="flow-arrow">→</div>
       <div class="flow-step">✅ 업장에 등록</div>
+    </div>
+
+    <div class="card">
+      <ul>
+        <li>20개 항목: 외관, 유리, 램프, 배터리, 오일류, 타이어, 브레이크, 서스펜션 등</li>
+        <li>각 항목별 <strong>양호/권고</strong> 체크 + 코멘트 입력</li>
+        <li>타이어 트레드 깊이, 브레이크 패드 두께 등 <strong>측정값 기록</strong></li>
+      </ul>
     </div>
 
     <div class="highlight">
@@ -455,31 +656,31 @@
   <!-- 4. 접수 및 작업 할당 -->
   <div class="section" id="assign">
     <div class="section-label">Step 4</div>
-    <h2>접수 및 작업 할당</h2>
+    <h2>고객 접수 및 작업 할당</h2>
 
-    <h3>엑셀 수납 이력 분석</h3>
+    <h3>수납 이력 자동 분석</h3>
     <p>고객의 수납 이력 엑셀 파일을 업로드하면 시스템이 자동으로 분석합니다.</p>
 
     <div class="feature-grid">
       <div class="feature-item">
         <div class="icon">👤</div>
         <h4>고객 정보 추출</h4>
-        <p>고객명, 전화번호, 차량번호, 차종을 자동 식별합니다.</p>
-      </div>
-      <div class="feature-item">
-        <div class="icon">💳</div>
-        <h4>결제 이력 정리</h4>
-        <p>최근 결제 내역을 날짜순으로 정리합니다.</p>
+        <p>고객명, 전화번호, 차량번호, 차종, 차대번호를 자동 식별합니다.</p>
       </div>
       <div class="feature-item">
         <div class="icon">🔧</div>
-        <h4>정비 항목 요약</h4>
-        <p>항목별 마지막 정비일과 주행거리를 요약합니다.</p>
+        <h4>정비 이력 정리</h4>
+        <p>정비 항목별 마지막 정비일과 주행거리를 요약합니다.</p>
+      </div>
+      <div class="feature-item">
+        <div class="icon">💳</div>
+        <h4>최근 정비 내역</h4>
+        <p>날짜순으로 정리하여 필요한 항목만 선택할 수 있습니다.</p>
       </div>
       <div class="feature-item">
         <div class="icon">⚠️</div>
         <h4>권장 정비 안내</h4>
-        <p>주기 초과 항목을 자동으로 알려줍니다.</p>
+        <p>교환주기 초과 항목을 자동으로 안내합니다.</p>
       </div>
     </div>
 
@@ -488,11 +689,11 @@
     <div class="card">
       <ul>
         <li><strong>담당 정비사</strong>를 선택합니다.</li>
-        <li><strong>작업 설명</strong>을 입력합니다 (예: 엔진오일 교체 및 브레이크 점검).</li>
-        <li>고객/차량 정보와 수납 이력이 자동으로 첨부됩니다.</li>
+        <li><strong>작업 설명</strong>을 입력합니다 (예: 엔진오일 교환 및 브레이크 점검).</li>
+        <li>선택한 정비 내역이 정비사에게 참고 정보로 전달됩니다.</li>
       </ul>
     </div>
-    <div class="highlight">MANAGER 이상의 권한이 필요합니다.</div>
+    <div class="highlight">접수는 웹 페이지(PC/태블릿)에서 진행합니다. MANAGER 이상의 권한이 필요합니다.</div>
   </div>
 
   <div class="divider"></div>
@@ -500,13 +701,13 @@
   <!-- 5. 작업 진행 -->
   <div class="section" id="work">
     <div class="section-label">Step 5</div>
-    <h2>작업 진행</h2>
+    <h2>점검 진행 및 서명</h2>
 
     <p>작업은 다음 상태를 거칩니다.</p>
     <div class="status-flow">
       <span class="status-badge waiting">대기 중</span>
       <span class="status-arrow">→</span>
-      <span class="status-badge progress">작업 중</span>
+      <span class="status-badge progress">점검 중</span>
       <span class="status-arrow">→</span>
       <span class="status-badge signature-pending">서명 대기</span>
       <span class="status-arrow">→</span>
@@ -517,30 +718,30 @@
       <span class="status-badge report-done">소견서 완료</span>
     </div>
 
-    <h3>작업 시작</h3>
-    <p>대기 중인 작업을 선택하고 사용할 <strong>안전점검표를 선택</strong>하면 작업이 시작됩니다.</p>
+    <h3>점검 시작</h3>
+    <p>앱에서 대기 중인 작업을 선택하고 <strong>안전점검표를 선택</strong>하면 점검이 시작됩니다.</p>
 
-    <h3>점검 진행 및 임시 저장</h3>
+    <h3>점검 진행</h3>
     <div class="card">
       <ul>
-        <li>점검표의 각 항목을 체크하며 점검을 진행합니다.</li>
+        <li>각 항목을 <strong>양호/권고</strong>로 체크하며 점검합니다.</li>
+        <li>타이어, 브레이크 등은 <strong>측정값</strong>을 직접 입력합니다.</li>
         <li>중간에 <strong>임시 저장</strong>하면 나중에 이어서 진행할 수 있습니다.</li>
-        <li>앱을 종료해도 데이터가 유지됩니다.</li>
+        <li>고객 정보(이름, 연락처 등)도 점검 중 수정 가능합니다.</li>
       </ul>
     </div>
 
-    <h3>작업 완료 및 서명</h3>
-    <p>모든 점검이 끝나면 <strong>"작업 완료"</strong>를 눌러 최종 결과를 저장합니다.</p>
+    <h3>서명</h3>
     <div class="card">
       <ul>
-        <li>작업 완료 시 <strong>서명 대기</strong> 상태로 전환됩니다.</li>
-        <li><strong>고객 서명</strong>을 받은 후 서명을 제출하면 <strong>서명 완료</strong> 상태가 됩니다.</li>
-        <li>서명 완료 후 AI 소견서 생성 화면으로 이동합니다.</li>
+        <li>점검 완료 후 <strong>정비사 서명</strong> → <strong>고객 서명</strong> 순서로 진행합니다.</li>
+        <li>정비사 서명은 마이페이지에서 미리 등록할 수도 있습니다.</li>
+        <li>서명 완료 시 <strong>안전점검표 PDF</strong>가 자동 생성됩니다.</li>
       </ul>
     </div>
 
     <h3>작업 취소</h3>
-    <p>대기 중 또는 작업 중 상태의 작업은 취소할 수 있습니다.</p>
+    <p>대기 중 또는 점검 중 상태의 작업은 취소할 수 있습니다.</p>
   </div>
 
   <div class="divider"></div>
@@ -548,46 +749,59 @@
   <!-- 6. AI 소견서 -->
   <div class="section" id="report">
     <div class="section-label">Step 6</div>
-    <h2>AI 소견서 생성</h2>
+    <h2>AI 소견서 생성 및 발송</h2>
 
-    <p>작업 완료 후, AI가 전문적인 정비 소견서를 자동 생성합니다.</p>
+    <p>서명 완료 후, AI가 전문적인 정비 소견서를 자동 생성합니다.</p>
 
     <div class="flow">
-      <div class="flow-step">📊 데이터 수집</div>
+      <div class="flow-step">📊 점검 데이터 수집</div>
       <div class="flow-arrow">→</div>
-      <div class="flow-step">🤖 AI 분석</div>
+      <div class="flow-step">🤖 AI 분석·작성</div>
       <div class="flow-arrow">→</div>
       <div class="flow-step">📄 PDF 생성</div>
       <div class="flow-arrow">→</div>
-      <div class="flow-step">📱 SMS 발송</div>
+      <div class="flow-step">💬 고객 알림톡 발송</div>
     </div>
 
     <h3>소견서에 포함되는 내용</h3>
     <div class="table-wrap">
       <table>
         <tr><th>섹션</th><th>내용</th></tr>
-        <tr><td>고객·차량 정보</td><td>고객명, 연락처, 차량번호, 주행거리</td></tr>
-        <tr><td>점검 결과</td><td>안전점검표 기반 항목별 상태</td></tr>
-        <tr><td>AI 종합 소견</td><td>차량 상태 평가, 주요 점검 사항, 권장 정비 항목</td></tr>
-        <tr><td>정비 이력</td><td>최근 정비 날짜, 내용, 주행거리</td></tr>
+        <tr><td>고객·차량 정보</td><td>고객명, 연락처, 차량번호, 주행거리, 담당 정비사</td></tr>
+        <tr><td>점검 결과 요약</td><td>양호/주의/불량 항목 분류, 측정값 시각화</td></tr>
+        <tr><td>AI 종합 소견</td><td>차량 상태 평가, 즉시 조치 사항, 권장 정비 일정</td></tr>
+        <tr><td>최근 정비 이력</td><td>접수 시 선택한 정비 내역</td></tr>
       </table>
     </div>
 
+    <h3>AI는 어떻게 소견서를 작성하나요?</h3>
+    <div class="card">
+      <ol>
+        <li><strong>데이터 수집</strong> — 안전점검표 결과(양호/권고/측정값), 고객 차량 정보, 접수 시 선택한 정비 이력을 하나로 모읍니다.</li>
+        <li><strong>차종별 분석</strong> — 해당 차종의 소모품 교환주기와 현재 주행거리를 비교하여 교체 시기를 판단합니다.</li>
+        <li><strong>종합 소견 작성</strong> — Claude AI가 20년 경력의 자동차 정비 전문가 관점에서 차량 상태를 평가하고, 즉시 조치가 필요한 항목과 다음 점검 시기를 안내합니다.</li>
+        <li><strong>PDF 자동 생성</strong> — 분석 결과를 전문적인 소견서 양식으로 정리하여 PDF를 생성합니다.</li>
+      </ol>
+    </div>
     <div class="highlight">
-      AI 분석은 <strong>Claude AI</strong>가 20년 경력의 자동차 정비 전문가 관점에서 작성합니다.
+      모든 분석은 <strong>Anthropic Claude AI</strong>가 수행하며, 점검 데이터와 정비 이력을 기반으로 객관적인 소견을 제공합니다. 소견서는 참고 자료이며, 최종 판단은 담당 정비사가 합니다.
     </div>
 
-    <h3>고객 SMS 알림</h3>
-    <p>소견서가 생성되면 고객에게 자동으로 문자가 발송됩니다.</p>
-    <div class="sms-preview">
-      <div class="sender">📩 CarAI 정비소</div>
-      홍길동님, 차량 정비 소견서가 작성되었습니다.<br>
-      아래 링크에서 확인하실 수 있습니다.<br>
-      <a href="#">https://carai.app/reports/...</a>
+    <h3>고객 알림톡 발송</h3>
+    <p>소견서가 완료되면 고객에게 카카오 알림톡으로 안전점검표와 소견서 PDF 링크를 발송합니다.</p>
+    <div class="alimtalk-preview">
+      <div class="sender">💬 카카오 알림톡</div>
+      <div class="msg">
+        홍길동님, 판교 아우디에서 차량 정비 소견서가 작성되었습니다.<br><br>
+        📋 안전점검표 확인<br>
+        <a href="#">storage.googleapis.com/...</a><br><br>
+        📄 소견서 확인<br>
+        <a href="#">storage.googleapis.com/...</a>
+      </div>
     </div>
 
     <h3>소견서 생성 실패 시</h3>
-    <p>네트워크 오류 등으로 생성이 실패하면 <strong>"소견서 재생성"</strong> 버튼으로 다시 시도할 수 있습니다.</p>
+    <p>네트워크 오류 등으로 실패하면 <strong>"소견서 재생성"</strong> 버튼으로 다시 시도할 수 있습니다.</p>
   </div>
 
   <div class="divider"></div>
@@ -597,31 +811,49 @@
     <div class="section-label">참고</div>
     <h2>역할 및 권한</h2>
 
+    <p>업장 내 역할에 따라 사용 가능한 기능이 다릅니다.</p>
+
     <div class="table-wrap">
       <table>
         <tr>
           <th>기능</th>
-          <th style="text-align:center">OWNER</th>
-          <th style="text-align:center">MANAGER</th>
-          <th style="text-align:center">STAFF</th>
+          <th style="text-align:center">OWNER<br><span style="font-weight:400;text-transform:none;letter-spacing:0">소유자</span></th>
+          <th style="text-align:center">MANAGER<br><span style="font-weight:400;text-transform:none;letter-spacing:0">관리자</span></th>
+          <th style="text-align:center">STAFF<br><span style="font-weight:400;text-transform:none;letter-spacing:0">정비사</span></th>
         </tr>
-        <tr><td>업장 정보 수정/삭제</td><td class="check">O</td><td class="no">-</td><td class="no">-</td></tr>
+        <tr><td>업장 정보 수정</td><td class="check">O</td><td class="no">-</td><td class="no">-</td></tr>
         <tr><td>직원 초대</td><td class="check">O</td><td class="check">O</td><td class="no">-</td></tr>
         <tr><td>역할 변경</td><td class="check">O</td><td class="no">-</td><td class="no">-</td></tr>
         <tr><td>직원 내보내기</td><td class="check">O</td><td class="check">O</td><td class="no">-</td></tr>
-        <tr><td>작업 할당</td><td class="check">O</td><td class="check">O</td><td class="no">-</td></tr>
-        <tr><td>점검표 등록/해제</td><td class="check">O</td><td class="check">O</td><td class="no">-</td></tr>
-        <tr><td>업장 작업 목록 조회</td><td class="check">O</td><td class="check">O</td><td class="check">O</td></tr>
-        <tr><td>내 작업 조회/진행</td><td class="check">O</td><td class="check">O</td><td class="check">O</td></tr>
-        <tr><td>AI 소견서 생성</td><td colspan="3" style="text-align:center; color: var(--text-secondary);">본인 작업만</td></tr>
+        <tr><td>고객 접수 · 작업 할당</td><td class="check">O</td><td class="check">O</td><td class="no">-</td></tr>
+        <tr><td>안전점검표 등록/해제</td><td class="check">O</td><td class="check">O</td><td class="no">-</td></tr>
+        <tr><td>업장 전체 작업 조회</td><td class="check">O</td><td class="check">O</td><td class="check">O</td></tr>
+        <tr><td>내 작업 점검/완료</td><td class="check">O</td><td class="check">O</td><td class="check">O</td></tr>
+        <tr><td>AI 소견서 생성/발송</td><td colspan="3" style="text-align:center; color: var(--text-secondary);">본인에게 할당된 작업만</td></tr>
       </table>
     </div>
+  </div>
+
+  <!-- CTA Bottom -->
+  <div class="cta-bottom">
+    <h2>지금 바로 시작하세요</h2>
+    <p>회원가입 후 업장을 생성하면 바로 사용할 수 있습니다.</p>
+    <a href="https://carai-web.web.app" class="hero-cta">CarAI 시작하기 →</a>
   </div>
 
   <div class="back-top">
     <a href="#signup">↑ 맨 위로</a>
   </div>
 
+</div>
+
+<div class="footer">
+  <div style="margin-bottom: 12px;">
+    <a href="http://pf.kakao.com/_qaIxhX" style="color: var(--primary); text-decoration: none; font-weight: 600;">💬 카카오톡 채널</a>
+    <span style="margin: 0 12px; color: var(--border);">|</span>
+    <a href="mailto:support@carai.ai.kr" style="color: var(--primary); text-decoration: none; font-weight: 600;">📧 support@carai.ai.kr</a>
+  </div>
+  &copy; AutoProofLab (오토프루프랩). All rights reserved.
 </div>
 
 </body>
